@@ -246,3 +246,26 @@ x(settings.keep,:) = y;
 x(settings.remove,:) = repmat(settings.constants,1,Q);
 end
 
+
+#python code to display graphs
+names = data.columns
+
+os.mkdir("plot")
+count=0
+
+for i in range(2,len(names)):
+    os.mkdir('_plot/'+names[i])
+    for j in range(2, len(names)):
+        if(names[i]!=names[j]):
+            sns.regplot(x=data[names[i]], y=data[names[j]])
+            plt.xlabel(names[i])
+            plt.ylabel(names[j])
+            plt.title(' plot of ' + str(names[i]) + ' and ' + str(names[j]))
+            # plt.show()
+            # names[j]=names[j].replace(" ","")
+            plt.savefig('_plot/' + str(names[i]) + '/' + names[j] + '.png')
+            plt.clf()
+            count += 1
+            plt.cla()
+
+
